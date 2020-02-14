@@ -14,10 +14,11 @@
     <form action="/registration" method="post">
         <h1>Sign Up</h1>
 
-        <input type="text" name="username" placeholder="Full Name" class="txtb">
+        <input type="text" name="username" placeholder="Username" class="txtb">
         <input type="password" name="password" placeholder="Password" class="txtb">
+        <input type="hidden" name="_csrf" value="${_csrf.token}" />
 
-        <input type="email" placeholder="Email" class="txtb">
+        <input type="email" name="email" placeholder="Email" class="txtb">
 
         <input type="submit" value="Create Account" class="signup-btn">
 
