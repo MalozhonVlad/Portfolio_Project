@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+
+</head>
+<body>
+
+<div class="loginbox">
+    <img src="/css/avatar.png" class="avatar">
+    <h1>Login Here</h1>
+
+    <form action="/login" method="post">
+        <p>Username</p>
+        <input type="text" name="username" placeholder="Enter Username">
+
+        <p>Password</p>
+        <input type="password" name="password" placeholder="Enter Password">
+        <input type="hidden" name="_csrf" value="${_csrf.token}" />
+
+        <input type="submit" value="Sign In">
+        <a href="#">Lost your password?</a><br>
+
+        <a href="registration">Don't have an account?</a>
+
+    </form>
+
+</div>
+
+
+
+</body>
+</html>
