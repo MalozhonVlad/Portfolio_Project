@@ -10,10 +10,13 @@
 </head>
 <body>
 
+
 <div class="signup-form">
     <form action="/registration" method="post">
         <h1>Sign Up</h1>
-
+        <#if message??>
+            <h2>${message}</h2>
+        </#if>
         <input type="text" name="username" placeholder="Username" class="txtb">
         <input type="password" name="password" placeholder="Password" class="txtb">
         <input type="hidden" name="_csrf" value="${_csrf.token}" />

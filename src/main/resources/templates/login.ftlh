@@ -14,6 +14,9 @@
     <h1>Login Here</h1>
 
     <form action="/login" method="post">
+        <#if code??>
+            <h3 class="successfullyActivated">${code}</h3>
+        </#if>
         <p>Username</p>
         <input type="text" name="username" placeholder="Enter Username">
 
@@ -22,7 +25,7 @@
         <input type="hidden" name="_csrf" value="${_csrf.token}" />
 
         <input type="submit" value="Sign In">
-        <a href="#">Lost your password?</a><br>
+<#--        <a href="#">Lost your password?</a><br>-->
 
         <a href="registration">Don't have an account?</a>
 

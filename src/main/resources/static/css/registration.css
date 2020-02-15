@@ -4,6 +4,10 @@ body{
     background: dodgerblue;
     /*background: url(bg.jpg) center no-repeat;*/
 }
+
+h2 {
+    color: yellow;
+}
 .signup-form{
     width: 300px;
     padding: 20px;

@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,6 +24,7 @@ public class User implements UserDetails {
     private String password;
 
     private String email;
+    private String activationCode;
 
     private boolean enabled;
     private boolean accountNonExpired;

@@ -8,4 +8,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     UserDetails findByUsername(String username);
 
+    User findByActivationCode(String code);
+
 }
