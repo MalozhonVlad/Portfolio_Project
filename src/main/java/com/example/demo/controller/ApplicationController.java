@@ -14,6 +14,7 @@ public class ApplicationController {
     @GetMapping("/greeting")
     public String greetingPage(@AuthenticationPrincipal User user) {
         System.out.println(user);
+        System.out.println("greetingPage");
         return "greeting";
     }
 

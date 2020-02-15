@@ -8,6 +8,9 @@ body{
 h2 {
     color: yellow;
 }
+h3 {
+    color: #ffc107;
+}
 .signup-form{
     width: 300px;
     padding: 20px;

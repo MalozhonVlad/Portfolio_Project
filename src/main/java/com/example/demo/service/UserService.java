@@ -8,12 +8,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.Collections;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -23,31 +22,36 @@ public class UserService implements UserDetailsService {
     private String productionUrl;
 
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final PasswordEncoder passwordEncoder;
     private final MailSender mailSender;
 
 
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return user;
     }
 
     public void save(User user) {
 
-//        User createNewUser = new User();
-
-//        createNewUser.setUsername(user.getUsername());
-//        createNewUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-//        createNewUser.setEmail(user.getEmail());
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         user.setAccountNonExpired(true);
         user.setCredentialsNonExpired(true);
         user.setAccountNonLocked(true);
         user.setEnabled(true);
-        user.setAuthorities(Collections.singleton(Role.USER));
+
+        Set<Role> roles = new HashSet<>();
+        roles.add(Role.USER);
+        user.setRoles(roles);
+
         user.setActivationCode(UUID.randomUUID().toString());
+        user.setMessageList(new ArrayList<>());
 
         userRepository.save(user);
 
