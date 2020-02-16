@@ -82,11 +82,15 @@ h1{
 
 .loginbox a:hover
 {
-    color: #ffc107;
+    color: darkgreen;
 }
 
 .successfullyActivated {
-    color: #ffc107;
+    color: darkgreen;
+}
+
+.bad {
+    color: darkgreen;
 }
 
 

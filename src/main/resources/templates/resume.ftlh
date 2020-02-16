@@ -11,8 +11,8 @@
 </head>
 <body>
   <div class="resume-container">
-    <div class="sidebar-container jumbotron">
 
+    <div class="sidebar-container jumbotron">
       <img class="main-img"  src="/css/photo.jpg" alt="portrait">
  
       <div class="info">

@@ -14,19 +14,6 @@
     <button type="submit">Добавить</button>
 </form>
 
-<#--<#if messages??>-->
-<#--    <#list messages as message>-->
-<#--        <div>-->
-<#--            <#if message.filename??>-->
-<#--                <img src="${message.filename}" class="card-img-top">-->
-<#--            </#if>-->
-<#--            <span>${message.text}</span>-->
-<#--            <i>${message.tag}</i>-->
-<#--            <strong>${message.author.username}</strong>-->
-<#--        </div>-->
-<#--    </#list>-->
-<#--</#if>-->
-
 <#if messages??>
     <div class="card-columns">
         <#list messages as message>

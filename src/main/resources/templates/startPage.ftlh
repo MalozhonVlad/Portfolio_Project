@@ -12,7 +12,7 @@
     <span></span>
     <span></span>
     <span></span>
-    RESUME
+    PORTFOLIO
 </a>
 <a href="aboutsweater">
     <span></span>
