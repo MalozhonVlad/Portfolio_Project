@@ -14,20 +14,20 @@
     <span></span>
     RESUME
 </a>
+<a href="aboutsweater">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    ABOUT SWEATER
+</a>
+
 <a href="greeting">
     <span></span>
     <span></span>
     <span></span>
     <span></span>
     LOGIN
-</a>
-
-<a href="registration">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    REGISTRATION
 </a>
 
 </body>

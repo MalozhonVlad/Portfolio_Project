@@ -81,5 +81,10 @@ public class RegistrationController {
         return "resume";
     }
 
+    @GetMapping("/aboutsweater")
+    public String aboutsweater() {
+        return "aboutsweater";
+    }
+
 
 }

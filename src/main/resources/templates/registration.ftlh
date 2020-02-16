@@ -13,7 +13,7 @@
 
 <div class="signup-form">
     <form action="/registration" method="post">
-        <h1>Sign Up</h1>
+        <h1>Registration</h1>
             <#if message??>
                 <h2>${message}</h2>
             </#if>

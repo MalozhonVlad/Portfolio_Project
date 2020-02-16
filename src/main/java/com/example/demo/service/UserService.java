@@ -40,6 +40,7 @@ public class UserService implements UserDetailsService {
     public void save(User user) {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword2(passwordEncoder.encode(user.getPassword()));
 
         user.setAccountNonExpired(true);
         user.setCredentialsNonExpired(true);
@@ -70,20 +71,27 @@ public class UserService implements UserDetailsService {
 
 
     public User findByUsername(String username) {
-        return (User)userRepository.findByUsername(username);
+        return userRepository.findByUsername(username);
     }
 
     public boolean activateUser(String code) {
 
         User user = userRepository.findByActivationCode(code);
 
+        System.out.println(user);
+
         if (user == null) {
             return false;
         }
 
+
+
         user.setActivationCode(null);
 
+
+
         userRepository.save(user);
+
 
         return true;
     }
