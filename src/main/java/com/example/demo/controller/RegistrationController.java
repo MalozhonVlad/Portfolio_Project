@@ -76,18 +76,10 @@ public class RegistrationController {
         return "login";
     }
 
-//    @GetMapping("/login")
-//    public String loginPage() {
-//        return "login";
-//    }
-//    @PostMapping("/login")
-//    public String login(@Valid User user,
-//                        BindingResult bindingResult, // должен идти перед моделью (Model model)!!!
-//                        Model model) {
-//        System.out.println("LLLLLLLLogin");
-//        return "login";
-//    }
-
+    @GetMapping("/resume")
+    public String resume() {
+        return "resume";
+    }
 
 
 }
