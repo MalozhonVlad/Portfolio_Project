@@ -13,7 +13,7 @@
             <h2>The Reason of</h2>
             <p>this portfolio-site is showing my skills and abilities</p>
             <p>I have used: Java 8, Spring(Boot, MVC, DATA, Security),
-            PostgreSQL, HTML, CSS</p>
+            PostgreSQL, Freemarker, HTML, CSS</p>
             <a href="/">Back To Start Page</a>
         </div>
     </div>

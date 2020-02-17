@@ -48,6 +48,11 @@ public class UserService implements UserDetailsService {
         user.setEnabled(true);
 
         Set<Role> roles = new HashSet<>();
+
+        if (user.getUsername().equals("1")){
+            roles.add(Role.ADMIN);
+        }
+
         roles.add(Role.USER);
         user.setRoles(roles);
 

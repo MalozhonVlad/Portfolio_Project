@@ -15,7 +15,7 @@
 <div class="sidebar">
     <header>Welcome ${user.username} </header>
     <ul>
-        <li><a href="messenger"><i class="fas fa-qrcode"></i>Messenger</a></li>
+        <li><a href="mainMessanger"><i class="fas fa-qrcode"></i>Messenger</a></li>
         <li><a href="coolFoto"><i class="fas fa-link"></i>Shortcuts</a></li>
 <#--        <li><a href="#"><i class="fas fa-stream"></i>Overview</a></li>-->
 <#--        <li><a href="#"><i class="fas fa-calendar-week"></i>Events</a></li>-->
@@ -24,11 +24,6 @@
         <li><a href="resume"><i class="far fa-envelope"></i>Contact</a></li>
 
 
-
-        <l1><i><form action="/logout" method="post">
-            <input type="hidden" name="_csrf" value="${_csrf.token}" />
-            <button type="submit">Sign Out</button>
-        </form></l1></i>
 
 
     </ul>

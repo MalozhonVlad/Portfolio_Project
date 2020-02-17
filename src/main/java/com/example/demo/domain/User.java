@@ -51,6 +51,10 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Message> messageList = new ArrayList<>();
 
+    public boolean isAdmin() {
+        return roles.contains(Role.ADMIN);
+    }
+
 
     public User(String username, String password) {
         this.username = username;

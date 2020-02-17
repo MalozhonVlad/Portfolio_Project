@@ -29,7 +29,8 @@ public class Message {
     @JoinColumn(name = "user_id")
     private User author;
 
-    @Lob
+//    @Lob
+    @Basic(fetch=FetchType.EAGER)
     private Byte[] bytes;
 
     @Transient

@@ -19,7 +19,7 @@
     <span></span>
     <span></span>
     <span></span>
-    ABOUT SWEATER
+    ABOUT PROJECT
 </a>
 
 <a href="greeting">

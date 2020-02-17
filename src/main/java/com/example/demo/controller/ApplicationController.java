@@ -35,7 +35,14 @@ public class ApplicationController {
     }
 
     @GetMapping("/messenger")
-    public String messenger() {
+    public String messenger(Model model) {
+
+        Iterable<Message> messages = messageRepository.findAll();
+
+        uploadFotoFromDb(messages);
+
+        model.addAttribute("messages", messages);
+
         return "messenger";
     }
 
@@ -73,6 +80,7 @@ public class ApplicationController {
 
         uploadFotoFromDb(messages);
 
+
         model.addAttribute("messages", messages);
 
         return "messenger";
@@ -81,6 +89,14 @@ public class ApplicationController {
     @GetMapping("/coolFoto")
     public String coolFoto() {
         return "coolFoto";
+    }
+
+    @GetMapping("/mainMessanger")
+    public String mainMessanger(@AuthenticationPrincipal User user,
+                                Model model) {
+        model.addAttribute("user", user);
+
+        return "mainMessanger";
     }
 
 

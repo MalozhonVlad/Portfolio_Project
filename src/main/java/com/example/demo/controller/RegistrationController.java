@@ -46,6 +46,12 @@ public class RegistrationController {
 
             return "registration";
         } else {
+
+            if (user.getPassword() != null && !user.getPassword().equals(user.getPassword2())) {
+                model.addAttribute("differentPassword","Passwords are different!");
+                return "registration";
+            }
+
             User userFromDb = userService.findByUsername(user.getUsername());
 
             if (userFromDb != null) {

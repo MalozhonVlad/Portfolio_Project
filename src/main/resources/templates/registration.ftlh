@@ -34,9 +34,9 @@
         <#if  passwordError??>
             <h3>${passwordError}</h3>
         </#if>
-        <#if differentPassword??>
-            <h3>${differentPassword}</h3>
-        </#if>
+<#--        <#if differentPassword??>-->
+<#--            <h3>${differentPassword}</h3>-->
+<#--        </#if>-->
         <input type="password" name="password2" placeholder="Repeat Password " class="txtb">
 
             <#if  emailError??>
