@@ -46,6 +46,25 @@ public class ApplicationController {
         return "messenger";
     }
 
+    @PostMapping("/filter")
+    public String filter(
+                         @RequestParam(required = false, defaultValue = "") String filter,
+                         Model model) {
+        Iterable<Message> messageByTag;
+
+        if (filter != null && !filter.isEmpty()) {
+            messageByTag = messageRepository.findByTag(filter);
+        } else {
+            messageByTag = messageRepository.findAll();
+        }
+
+        uploadFotoFromDb(messageByTag);
+
+        model.addAttribute("messages", messageByTag);
+
+        return "messenger";
+    }
+
     @PostMapping("/messenger")
     public String messengerPost(@AuthenticationPrincipal User user,
                                 @Valid Message message,

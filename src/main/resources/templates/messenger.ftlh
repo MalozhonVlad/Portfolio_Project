@@ -15,10 +15,21 @@
 <#include "parts/navbar.ftlh" />
 
 <div class="container mt-5">
+
+    <div class="form-group mt-3">
+        <form action="/filter" method="post">
+            <input type="text" name="filter" placeholder="Find by Tag">
+            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+            <button type="submit" class="btn btn-primary">Найти</button>
+        </form>
+    </div>
+
     <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
        aria-controls="collapseExample">
         Add new Message
     </a>
+
+
     <div class="collapse" id="collapseExample">
         <div class="form-group mt-3">
             <form action="/messenger" method="post" enctype="multipart/form-data">
@@ -65,8 +76,8 @@
             No message
         </#list>
     </div>
-</div>
 
+</div>
 
 
 <!-- Optional JavaScript -->
