@@ -78,6 +78,11 @@ public class ApplicationController {
         return "messenger";
     }
 
+    @GetMapping("/coolFoto")
+    public String coolFoto() {
+        return "coolFoto";
+    }
+
 
     private void uploadFotoFromDb(Iterable<Message> messages) {
         for (Message message1 : messages) {
