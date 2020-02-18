@@ -3,11 +3,13 @@ package com.example.demo.controller;
 import com.example.demo.domain.Message;
 import com.example.demo.domain.User;
 import com.example.demo.repository.MessageRepository;
+import com.example.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +28,7 @@ import java.util.Map;
 public class ApplicationController {
 
     private final MessageRepository messageRepository;
+    private final UserRepository userRepository;
 
 
     @GetMapping("/greeting")
@@ -49,8 +52,8 @@ public class ApplicationController {
 
     @PostMapping("/filter")
     public String filter(
-                         @RequestParam(required = false, defaultValue = "") String filter,
-                         Model model) {
+            @RequestParam(required = false, defaultValue = "") String filter,
+            Model model) {
         Iterable<Message> messageByTag;
 
         if (filter != null && !filter.isEmpty()) {
@@ -81,13 +84,7 @@ public class ApplicationController {
             model.mergeAttributes(errorsMap);
             model.addAttribute("message", message);
         } else {
-            if (file != null && !file.getOriginalFilename().isEmpty()) {
-                Byte[] fileToLoadBytes = new Byte[file.getBytes().length];
-                int count = 0;
-                for (byte b : file.getBytes()) fileToLoadBytes[count++] = b;
-
-                message.setBytes(fileToLoadBytes);
-            }
+            saveFileToDB(message, file);
 
             messageList.add(message);
             user.setMessageList(messageList);
@@ -104,6 +101,17 @@ public class ApplicationController {
         model.addAttribute("messages", messages);
 
         return "messenger";
+    }
+
+    private void saveFileToDB(@Valid Message message,
+                              @RequestParam("file") MultipartFile file) throws IOException {
+        if (file != null && !file.getOriginalFilename().isEmpty()) {
+            Byte[] fileToLoadBytes = new Byte[file.getBytes().length];
+            int count = 0;
+            for (byte b : file.getBytes()) fileToLoadBytes[count++] = b;
+
+            message.setBytes(fileToLoadBytes);
+        }
     }
 
     @GetMapping("/coolFoto")
@@ -126,16 +134,76 @@ public class ApplicationController {
 
     @GetMapping("/user-messages/{user}")
     public String userMessagesss(@AuthenticationPrincipal User currentUser,
-                               @PathVariable User user,
-                               Model model) {
+                                 @PathVariable User user,
+                                 Model model,
+                                 @RequestParam(required = false) Message message) {
         List<Message> messageList = user.getMessageList();
 
         uploadFotoFromDb(messageList);
 
+        model.addAttribute("edit", true);
         model.addAttribute("messages", messageList);
+        model.addAttribute("message", message);
         model.addAttribute("isCurrentUser", currentUser.equals(user));
 
         return "userMessages";
+    }
+
+    @PostMapping("/user-messages/{user}")
+    public String updateMessage(@AuthenticationPrincipal User currentUser,
+                                @PathVariable Long user,
+                                @RequestParam("id") Message message,
+                                @RequestParam("text") String text,
+                                @RequestParam("tag") String tag,
+                                @RequestParam("file") MultipartFile file,
+                                Model model) throws IOException {
+
+
+        if (message.getAuthor().equals(currentUser)) {
+            if (!StringUtils.isEmpty(text)) {
+                message.setText(text);
+            } else {
+                model.addAttribute("text", "Text cannot be empty");
+                return "redirect:/user-messages/" + user;
+            }
+
+            if (!StringUtils.isEmpty(tag)) {
+                message.setTag(tag);
+            }
+
+
+            if (file != null && !file.getOriginalFilename().isEmpty()) {
+                saveFileToDB(message, file);
+            }
+
+
+            messageRepository.save(message);
+        }
+        return "redirect:/user-messages/" + user;
+    }
+
+    @GetMapping("/deleteMessage/{messageId}")
+    public String deleteMessage(@AuthenticationPrincipal User currentUser,
+                                @PathVariable("messageId") String messageId) {
+
+        long deleteLong = Long.valueOf(messageId);
+
+        Message byId = messageRepository.findById(deleteLong).get();
+
+
+        User byUsername = userRepository.findByUsername(currentUser.getUsername());
+
+        List<Message> messageList = byUsername.getMessageList();
+
+        if (messageList.contains(byId)) {
+            byUsername.getMessageList().remove(byId);
+        }
+
+        userRepository.save(byUsername);
+
+        messageRepository.delete(byId);
+
+        return "redirect:/user-messages/" + currentUser.getId();
     }
 
 

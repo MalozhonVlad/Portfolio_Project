@@ -15,11 +15,13 @@
 
 <div class="container mt-5">
     <#--просто вставляет целую страницу messageEdit.ftlh в ето место !!!-->
-    <#include "parts/security.ftlh">
+    <#--    <#include "parts/security.ftlh">-->
 
-    <#--<#if isCurrentUser>-->
-    <#include "parts/messageEdit.ftlh" />
-    <#--</#if>-->
+    <#if isCurrentUser>
+        <#if edit>
+            <#include "parts/messageEdit.ftlh" />
+        </#if>
+    </#if>
     <#include "parts/messageList.ftlh" />
 </div>
 
