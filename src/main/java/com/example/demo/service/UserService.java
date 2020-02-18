@@ -49,7 +49,7 @@ public class UserService implements UserDetailsService {
 
         Set<Role> roles = new HashSet<>();
 
-        if (user.getUsername().equals("1")){
+        if (user.getUsername().equals("vlad")){
             roles.add(Role.ADMIN);
         }
 
