@@ -177,7 +177,6 @@ public class ApplicationController {
                 message.setTag(tag);
             }
 
-
             if (file != null && !file.getOriginalFilename().isEmpty()) {
                 saveFileToDB(message, file);
             }
@@ -186,7 +185,8 @@ public class ApplicationController {
             messageRepository.save(message);
         }
 
-        return "redirect:/user-messages/" + user;
+//        return "redirect:/user-messages/" + user;
+        return "redirect:/allMessagesByUser";
     }
 
     @GetMapping("/deleteMessage/{messageId}")
@@ -211,17 +211,14 @@ public class ApplicationController {
 
         messageRepository.delete(byId);
 
-        return "redirect:/user-messages/" + currentUser.getId();
-//        return "allMessagesByUser";
+        return "redirect:/allMessagesByUser";
     }
 
     @GetMapping("/allMessagesByUser")
     public String allMessagesByUser(@AuthenticationPrincipal User user,
                                     Model model) {
 
-//        Iterable<Message> messages = messageRepository.findAll();
-
-        List<Message> messages = user.getMessageList();
+        List<Message> messages = messageRepository.findAllMessagesByUserId(user.getId());
 
         uploadFotoFromDb(messages);
 
