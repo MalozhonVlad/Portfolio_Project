@@ -55,7 +55,7 @@ public class RegistrationController {
             User userFromDb = userService.findByUsername(user.getUsername());
 
             if (userFromDb != null) {
-                model.addAttribute("message", "User already exists!");
+                model.addAttribute("message", "User " + user.getUsername() +" already exists!");
                 return "registration";
             }
             model.addAttribute("user", null);

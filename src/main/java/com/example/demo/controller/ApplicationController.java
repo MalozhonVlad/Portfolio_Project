@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -110,12 +111,31 @@ public class ApplicationController {
         return "coolFoto";
     }
 
+    @GetMapping("/mountains")
+    public String mountains() {
+        return "mountains";
+    }
+
     @GetMapping("/mainMessanger")
     public String mainMessanger(@AuthenticationPrincipal User user,
                                 Model model) {
         model.addAttribute("user", user);
 
         return "mainMessanger";
+    }
+
+    @GetMapping("/user-messages/{user}")
+    public String userMessagesss(@AuthenticationPrincipal User currentUser,
+                               @PathVariable User user,
+                               Model model) {
+        List<Message> messageList = user.getMessageList();
+
+        uploadFotoFromDb(messageList);
+
+        model.addAttribute("messages", messageList);
+        model.addAttribute("isCurrentUser", currentUser.equals(user));
+
+        return "userMessages";
     }
 
 

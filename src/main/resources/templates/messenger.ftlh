@@ -50,7 +50,7 @@
                     <label class="custom-file-label" for="customFile">Choose file</label>
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                <div class="form-group">
+                <div class="form-group mt-2">
                     <button type="submit" class="btn btn-primary">Добавить</button>
                 </div>
             </form>
@@ -58,24 +58,7 @@
     </div>
 
 
-    <div class="card-columns">
-        <#list messages as message>
-            <div class="card my-3">
-                <#if message.filename??>
-                    <img src="${message.filename}" class="card-img-top">
-                </#if>
-                <div class="m-2">
-                    <span>${message.text}</span><br>
-                    <i>${message.tag}</i>
-                </div>
-                <div class="card-footer text-muted">
-                    ${message.author.username}
-                </div>
-            </div>
-        <#else>
-            No message
-        </#list>
-    </div>
+    <#include "parts/messageList.ftlh" />
 
 </div>
 

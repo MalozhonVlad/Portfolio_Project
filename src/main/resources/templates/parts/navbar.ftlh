@@ -19,6 +19,9 @@
                 <a class="nav-link" href="/messenger">User List - зделать страничку пользователей видно только админу!!!</a>
             </li>
             </#if>
+            <li class="nav-item">
+                <a class="nav-link" href="/user-messages/${currentUserId}">My messages</a>
+            </li>
         </ul>
 
         <div class="navbar-text mr-3">${name}</div>

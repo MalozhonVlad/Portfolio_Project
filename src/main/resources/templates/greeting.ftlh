@@ -16,8 +16,8 @@
     <header>Welcome ${user.username} </header>
     <ul>
         <li><a href="mainMessanger"><i class="fas fa-qrcode"></i>Messenger</a></li>
-        <li><a href="coolFoto"><i class="fas fa-link"></i>Shortcuts</a></li>
-<#--        <li><a href="#"><i class="fas fa-stream"></i>Overview</a></li>-->
+<#--        <li><a href="coolFoto"><i class="fas fa-link"></i>Shortcuts</a></li>-->
+<#--        <li><a href="/mountains"><i class="fas fa-stream"></i>Cool CSS effects</a></li>-->
 <#--        <li><a href="#"><i class="fas fa-calendar-week"></i>Events</a></li>-->
         <li><a href="aboutsweater"><i class="far fa-question-circle"></i>About</a></li>
 <#--        <li><a href="#"><i class="fas fa-sliders-h"></i>Services</a></li>-->

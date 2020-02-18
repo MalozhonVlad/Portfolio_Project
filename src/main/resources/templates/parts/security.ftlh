@@ -13,6 +13,6 @@ known = Session.SPRING_SECURITY_CONTEXT??
     <#assign
     name = "unknown"
     isAdmin = false
-<#--    currentUserId = -1-->
+    currentUserId = -1
     >
 </#if>
