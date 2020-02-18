@@ -20,7 +20,8 @@
             </li>
             </#if>
             <li class="nav-item">
-                <a class="nav-link" href="/user-messages/${currentUserId}">My messages</a>
+<#--                <a class="nav-link" href="/user-messages/${currentUserId}">My messages</a>-->
+                <a class="nav-link" href="/allMessagesByUser">My messages</a>
             </li>
         </ul>
 

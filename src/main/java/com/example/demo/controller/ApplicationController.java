@@ -19,9 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -137,12 +135,20 @@ public class ApplicationController {
                                  @PathVariable User user,
                                  Model model,
                                  @RequestParam(required = false) Message message) {
+
         List<Message> messageList = user.getMessageList();
 
-        uploadFotoFromDb(messageList);
+        Set<Message> messagesSet = new HashSet<>();
 
-        model.addAttribute("edit", true);
-        model.addAttribute("messages", messageList);
+        for (Message message1 : messageList) {
+            messagesSet.add(message1);
+        }
+
+        uploadFotoFromDb(messagesSet);
+
+
+
+        model.addAttribute("messages", messagesSet);
         model.addAttribute("message", message);
         model.addAttribute("isCurrentUser", currentUser.equals(user));
 
@@ -179,6 +185,7 @@ public class ApplicationController {
 
             messageRepository.save(message);
         }
+
         return "redirect:/user-messages/" + user;
     }
 
@@ -197,6 +204,7 @@ public class ApplicationController {
 
         if (messageList.contains(byId)) {
             byUsername.getMessageList().remove(byId);
+            byUsername.setMessageList(messageList);
         }
 
         userRepository.save(byUsername);
@@ -204,6 +212,22 @@ public class ApplicationController {
         messageRepository.delete(byId);
 
         return "redirect:/user-messages/" + currentUser.getId();
+//        return "allMessagesByUser";
+    }
+
+    @GetMapping("/allMessagesByUser")
+    public String allMessagesByUser(@AuthenticationPrincipal User user,
+                                    Model model) {
+
+//        Iterable<Message> messages = messageRepository.findAll();
+
+        List<Message> messages = user.getMessageList();
+
+        uploadFotoFromDb(messages);
+
+        model.addAttribute("messages", messages);
+
+        return "allMessagesByUser";
     }
 
 
