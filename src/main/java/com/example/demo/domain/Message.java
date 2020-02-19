@@ -33,6 +33,8 @@ public class Message {
     @Basic(fetch=FetchType.EAGER)
     private Byte[] bytes;
 
+
+
     @Transient
     private String filename;
 
